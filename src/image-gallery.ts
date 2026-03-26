@@ -17,7 +17,6 @@ export interface GalleryImage {
 	data: string; // base64
 	mimeType: string;
 	label: string;
-	placeholder: string;
 }
 
 const THUMB_MAX_WIDTH = 25;
@@ -298,7 +297,7 @@ export class ImageGallery implements Component {
 		// Label row beneath images
 		let labelLine = " ";
 		for (let i = 0; i < this.images.length; i++) {
-			const label = this.images[i].placeholder;
+			const label = this.images[i].label;
 			const cols = imageInfos[i].cols;
 			const padLen = Math.floor((cols + label.length) / 2);
 			const padded = label.padStart(padLen).padEnd(cols);
@@ -314,7 +313,7 @@ export class ImageGallery implements Component {
 	private renderTextFallback(lines: string[]): void {
 		for (const img of this.images) {
 			lines.push(
-				this.theme.muted(`  ${img.placeholder} ${img.label}`),
+				this.theme.muted(`  ${img.label}`),
 			);
 		}
 	}
