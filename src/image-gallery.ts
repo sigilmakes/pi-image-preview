@@ -294,19 +294,22 @@ export class ImageGallery implements Component {
 			lines.push(line);
 		}
 
-		// Label row beneath images — truncate and center
+		// Label row beneath images — middle-truncate and center
 		let labelLine = " ";
 		for (let i = 0; i < this.images.length; i++) {
 			const cols = imageInfos[i].cols;
 			let label = this.images[i].label;
 
-			// Truncate long filenames with ellipsis
-			if (label.length > cols - 2) {
-				label = label.slice(0, cols - 3) + "…";
+			// Middle-truncate: "pi-clipboard-044c...21ad4.png"
+			if (label.length > cols) {
+				const keep = cols - 1; // 1 char for …
+				const head = Math.ceil(keep / 2);
+				const tail = keep - head;
+				label = label.slice(0, head) + "…" + label.slice(-tail);
 			}
 
 			// Center the label within the column width
-			const totalPad = cols - label.length;
+			const totalPad = Math.max(0, cols - label.length);
 			const leftPad = Math.floor(totalPad / 2);
 			const rightPad = totalPad - leftPad;
 			const padded = " ".repeat(leftPad) + label + " ".repeat(rightPad);
