@@ -2,7 +2,7 @@
 
 Image preview extension for [pi coding agent](https://github.com/mariozechner/pi-coding-agent) — renders inline image thumbnails above the editor using the kitty graphics protocol with full tmux support.
 
-![Layout example](https://img.shields.io/badge/layout-horizontal_thumbnails-blue)
+![Screenshot](screenshot.png)
 
 ## Features
 
