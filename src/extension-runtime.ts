@@ -65,6 +65,25 @@ const POLL_INTERVAL_MS = 250;
 const IMAGE_PATH_RE =
 	/((?:\/[\w.@~\-]+)+\.(?:png|jpe?g|gif|webp))\b/gi;
 
+/** Produce a short human-readable label from an image path. */
+function trimImageLabel(filePath: string): string {
+	const base = path.basename(filePath);
+
+	// pi-clipboard-<uuid>.png → "clipboard 1", "clipboard 2", etc.
+	if (base.startsWith("pi-clipboard-")) {
+		const ext = path.extname(base);
+		return `pasted${ext}`;
+	}
+
+	// screenshot-<uuid>.png → "screenshot.png"
+	if (base.startsWith("screenshot-") || base.startsWith("Screenshot")) {
+		const ext = path.extname(base);
+		return `screenshot${ext}`;
+	}
+
+	return base;
+}
+
 // ── Extension ──────────────────────────────────────────────
 
 export function registerImagePreviewExtension(
@@ -163,7 +182,7 @@ export function registerImagePreviewExtension(
 			tracked.set(rawPath, {
 				filePath: rawPath,
 				image,
-				label: path.basename(rawPath),
+				label: trimImageLabel(rawPath),
 			});
 			changed = true;
 
