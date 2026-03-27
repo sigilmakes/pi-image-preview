@@ -1,6 +1,6 @@
 {
   "name": "pi-image-preview",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Image preview extension for pi coding agent — renders inline image thumbnails above the editor using kitty graphics protocol with tmux support",
   "keywords": [
     "pi-package",
