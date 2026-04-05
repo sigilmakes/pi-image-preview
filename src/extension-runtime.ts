@@ -240,8 +240,10 @@ export function registerImagePreviewExtension(
 
 	// ── Event handlers ─────────────────────────────────────
 
-	pi.on("before_agent_start", () => {
-		return { systemPrompt: PREFER_INLINE_SCREENSHOT_PROMPT };
+	pi.on("before_agent_start", (event: { systemPrompt: string }) => {
+		return {
+			systemPrompt: event.systemPrompt + "\n\n" + PREFER_INLINE_SCREENSHOT_PROMPT,
+		};
 	});
 
 	// Clean up resources when the process exits
