@@ -1,7 +1,6 @@
 import path from "node:path";
 import type { ImageContent, ContentBlock } from "./content.ts";
 import { ImageGallery, type GalleryImage } from "./image-gallery.ts";
-import { PREFER_INLINE_SCREENSHOT_PROMPT } from "./prompt.ts";
 import { upgradeScreenshotToolResult } from "./tool-result-upgrader.ts";
 import { debugLog } from "./debug.ts";
 
@@ -239,12 +238,6 @@ export function registerImagePreviewExtension(
 	}
 
 	// ── Event handlers ─────────────────────────────────────
-
-	pi.on("before_agent_start", (event: { systemPrompt: string }) => {
-		return {
-			systemPrompt: event.systemPrompt + "\n\n" + PREFER_INLINE_SCREENSHOT_PROMPT,
-		};
-	});
 
 	// Clean up resources when the process exits
 	const cleanup = (): void => {
